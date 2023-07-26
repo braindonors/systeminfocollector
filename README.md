@@ -2,20 +2,27 @@
 
 Sysinfo Python app to store system data in a python database
 
-Usage: Start in Docker or via apache web
+Usage: 
+use pip -r requirements.txt to install the correct subordinate components.
 
+Start in Docker or via Apache web (Both of these need additional configuration which I haven't built out yet.
 
+From the app folder
 
-#Primary usage
+```bash
+system: ~$ cd ./systeminfocollector
+system: ~/systeminfocollector$ pip install -r requirements.txt
+system: ~/systeminfocollector$ python3 ./app.py
+```
+
+# Primary usage from a client machine
 ```bash
 curl http://webserver/sysinfo.sh | bash
 
-or 
-
 curl http://webserver/sysinfo.py | python3
 
-or
-
+```
+```powershell
 PS> iex (iwr "http://webserver/sysinfo.ps1").Content
 
 ```
