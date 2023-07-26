@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}System Info Dashboard{% endblock %}
+
+{% block heading %}System Info Dashboard{% endblock %}
+
+{% block content %}
+<div>
+<h2>Usage</h2>
+<pre>
+
+curl http://webserver/sysinfo.sh | bash
+
+or 
+
+curl http://webserver/sysinfo.py | python3
+
+or
+
+PS> iex (iwr "http://webserver/sysinfo.ps1").Content
+</pre>
+    
+
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Machine Name</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for machine in machines %}
+        <tr>
+            <td>{{ machine.hostname }}</td>
+            <td><a href="/machine/{{ machine.id }}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}System Info - {{ machine }}{% endblock %}
+
+{% block heading %}System Info - {{ machine }}{% endblock %}
+
+{% block content %}
+<script>
+    function jsonToTable(data,element)
+    {
+    
+    
+    var col = [];
+                for (var i = 0; i < json.length; i++) {
+                    for (var key in json[i]) {
+                        if (col.indexOf(key) === -1) {
+                            col.push(key);
+                        }
+                    }
+                }
+    // CREATE DYNAMIC TABLE.
+    var table = document.createElement("table");
+        
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+    
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+    
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+    
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < data.length; i++) {
+    
+            tr = table.insertRow(-1);
+    
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = data[i][col[j]];
+            }
+        }
+    
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById(element);
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+    
+                    </script>
+    
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Machine Name</th>
+            <td>{{ system_info.machine_name }}</td>
+        </tr>
+        <tr>
+            <th>Operating System</th>
+            <td>{{ system_info.operating_system }}</td>
+        </tr>
+        <tr>
+            <th>Version</th>
+            <td>{{ system_info.version }}</td>
+        </tr>
+        <tr>
+            <th>Manufacturer</th>
+            <td>{{ system_info.manufacturer }}</td>
+        </tr>
+        <tr>
+            <th>Model</th>
+            <td>{{ system_info.model }}</td>
+        </tr>
+        <tr>
+            <th>Total Memory (GB)</th>
+            <td>{{ system_info.total_memory }}</td>
+        </tr>
+        <tr>
+            <th>IP Addresses</th>
+            <td>{{ system_info.ip_addresses }}</td>
+        </tr>
+        <tr>
+            <th>Disks</th>
+            <td>{{ disks  }}</td>
+        </tr>
+        <tr>
+            <th>System Type</th>
+            <td>{{ system_info.system_type }}</td>
+        </tr>
+        <tr>
+            <th>Hostname</th>
+            <td>{{ system_info.hostname }}</td>
+        </tr>
+        <tr>
+            <th>Python Version</th>
+            <td>{{ system_info.python_version }}</td>
+        </tr>
+        <tr>
+            <th>Processor Type</th>
+            <td>{{ system_info.processor_type }}</td>
+        </tr>
+        <tr>
+            <th>Processor Cores</th>
+            <td>{{ system_info.processor_cores }}</td>
+        </tr>
+        <tr>
+            <th>Processor Threads</th>
+            <td>{{ system_info.processor_threads }}</td>
+        </tr>
+        <tr>
+            <th>Network Adapters</th>
+            <td>
+                
+                
+                <div id="network_adapters">{{ network }}</div>    
+            <script>
+                var json='{{ network }}';
+                //jsonToTable(json,'network_adapters');
+            </script>    
+            
+            
+
+            
+            
+            
+            </td>
+        </tr>
+        <tr>
+            <th>Dell Service Tag</th>
+            <td>{{ system_info.dell_service_tag }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
